@@ -2,55 +2,96 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define rows1 3
+#define rows2 3
+#define col1 3
+#define col2 3
+
+void freeMx(int** Mx, size_t rows)
+{
+    if (Mx)
+    {
+        for (size_t i = 0; i < rows; i++)
+        {
+            free(Mx[i]);
+        }
+    }
+    free(Mx);
+}
+
 int** CreateMx(size_t rows, size_t columns, int A, int B)
 {
     int **dmas = (int **)calloc(rows, sizeof(int*));
-    for (size_t i = 0; i < rows; i++)
+    if (dmas)
     {
-        dmas[i] = (int *)calloc(columns, sizeof(int));
-        for (size_t k = 0; k < columns; k++)
+        for (size_t i = 0; i < rows; i++)
         {
-            dmas[i][k] = A + rand() % (B - A + 1);
+            dmas[i] = (int *)calloc(columns, sizeof(int));
+            for (size_t k = 0; k < columns; k++)
+            {
+                dmas[i][k] = A + rand() % (B - A + 1);
+            }
         }
+        return dmas;
     }
-    return dmas;
+    else
+    {
+        freeMx(dmas, rows);
+    }
 }
 
 void printMx(int** Mx, int rows, int columns)
 {
-    for (int ix = 0; ix < rows; ix++)
+    if (Mx)
     {
-        if (Mx[ix])
+        for (int ix = 0; ix < rows; ix++)
         {
-            for (int kx = 0; kx < columns; kx++)
+            if (Mx[ix])
             {
-                printf("%d ", Mx[ix][kx]);
+                for (int kx = 0; kx < columns; kx++)
+                {
+                    printf("%d ", Mx[ix][kx]);
+                }
+                printf("\n");
             }
-            printf("\n");
+            else
+            {
+                printf("Null");
+            }
+        }
+    }
+}
+
+int** Multiplication(int **Mx1, int **Mx2, size_t rowsA, size_t colB)
+{
+    if (Mx1 && Mx2)
+    {
+        int **MulMx = (int**)calloc(rowsA, sizeof(int*));
+        if (MulMx)
+        {
+            if (rowsA == colB)
+            {
+                for (size_t i = 0; i < rowsA; i++)
+                {
+                    MulMx[i] = (int *)calloc(colB, sizeof(int));
+                    for (size_t j = 0; j < colB; j++) {
+                        int sum = 0;
+                        for (size_t k = 0; k < rowsA; k++)
+                        {
+                            sum += Mx1[i][k] * Mx2[k][j];
+                        }
+                        MulMx[i][j] = sum;
+                    }
+                }
+                return MulMx;
+            }
         }
         else
         {
-            printf("Null");
+            freeMx(MulMx, rowsA);
         }
     }
-}
 
-void FreeMx(int **Mx, size_t rows)
-{
-    for (size_t i = 0; i < rows; i++)
-    {
-        free(Mx[i]);
-        Mx[i] = NULL;
-    }
-}
-
-int** Multiplication(int **Mx1, int **Mx2)
-{
-    int **dmas = (int**)calloc(15, sizeof(int*));
-    for (size_t i = 0; i < 15; i++)
-    {
-
-    }
 }
 
 int main()
@@ -58,10 +99,14 @@ int main()
     int** Mx1 = NULL;
     int** Mx2 = NULL;
     srand(time(0));
-    Mx1 = CreateMx(15, 15, -10, 10);
-    //Mx2 = CreateMx(10, 10, 5, 15);
-    printMx(Mx1, 15, 15);
+    Mx1 = CreateMx(rows1, col1, 0, 7);
+    Mx2 = CreateMx(rows2, col2, 5, 10);
+    printMx(Mx1, rows1, col1);
     printf("\n");
-    //printMx(Mx2, 15, 15);
+    printMx(Mx2, rows2, col2);
+    printf("\n");
+    int** Mx3 = CreateMx(rows1, col2, 0, 0);
+    Mx3 = Multiplication(Mx1, Mx2, rows1, col2);
+    printMx(Mx3, 3, 3);
     return 0;
 }
