@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define rows1 3
-#define rows2 3
-#define col1 3
-#define col2 3
-
 void freeMx(int** Mx, size_t rows)
 {
     if (Mx)
@@ -99,14 +94,16 @@ int main()
     int** Mx1 = NULL;
     int** Mx2 = NULL;
     srand(time(0));
-    Mx1 = CreateMx(rows1, col1, 0, 7);
-    Mx2 = CreateMx(rows2, col2, 5, 10);
-    printMx(Mx1, rows1, col1);
+
+    Mx1 = CreateMx(3, 3, 0, 7);
+    Mx2 = CreateMx(3, 3, 5, 10);
+
+    printMx(Mx1, 3, 3);
     printf("\n");
-    printMx(Mx2, rows2, col2);
+    printMx(Mx2, 3, 3);
     printf("\n");
-    int** Mx3 = CreateMx(rows1, col2, 0, 0);
-    Mx3 = Multiplication(Mx1, Mx2, rows1, col2);
+
+    int** Mx3 = Multiplication(Mx1, Mx2, 3, 3);
     printMx(Mx3, 3, 3);
     return 0;
 }
