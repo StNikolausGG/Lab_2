@@ -35,7 +35,7 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
     }
 }
 
-void printMx(int** Mx, int rows, int columns)
+void printMx(int** Mx, size_t rows, size_t columns)
 {
     if (Mx)
     {
@@ -57,9 +57,41 @@ void printMx(int** Mx, int rows, int columns)
     }
 }
 
+int** Transponation(int **Mx, size_t rows, size_t columns)
+{
+    if (Mx)
+    {
+        int** TrspMx = (int **) calloc (columns, sizeof (int*));
+        if (TrspMx)
+        {
+            for (size_t i = 0; i < columns; i++)
+            {
+                TrspMx[i] = (int *) calloc (rows, sizeof (int));
+                for (size_t k = 0; k < rows; k++)
+                {
+                    TrspMx[i][k] = Mx[k][i];
+                }
+            }
+            return TrspMx;
+        }
+        else
+        {
+            freeMx(TrspMx, rows);
+        }
+    }
+}
+
 
 int main()
 {
-    printf("Hello World!\n");
+    int** Mx = NULL;
+    int rows = 6;
+    int cols = 6;
+    Mx = CreateMx(rows, cols, 1, 10);
+    printMx(Mx, rows, cols);
+    printf("\n");
+    int** newMx = NULL;
+    newMx = Transponation(Mx, rows, cols);
+    printMx(newMx, cols, rows);
     return 0;
 }
