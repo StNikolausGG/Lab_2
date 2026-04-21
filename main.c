@@ -32,6 +32,7 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
     else
     {
         freeMx(dmas, rows);
+        return NULL;
     }
 }
 
@@ -39,11 +40,11 @@ void printMx(int** Mx, size_t rows, size_t columns)
 {
     if (Mx)
     {
-        for (int ix = 0; ix < rows; ix++)
+        for (size_t ix = 0; ix < rows; ix++)
         {
             if (Mx[ix])
             {
-                for (int kx = 0; kx < columns; kx++)
+                for (size_t kx = 0; kx < columns; kx++)
                 {
                     printf("%d ", Mx[ix][kx]);
                 }
@@ -79,15 +80,18 @@ int** Transponation(int **Mx, size_t rows, size_t columns)
             freeMx(TrspMx, rows);
         }
     }
+    else
+    {
+        return NULL;
+    }
 }
 
 
 int main()
 {
-    int** Mx = NULL;
     int rows = 6;
     int cols = 6;
-    Mx = CreateMx(rows, cols, 1, 10);
+    int** Mx = CreateMx(rows, cols, 1, 10);
     printMx(Mx, rows, cols);
     printf("\n");
     int** newMx = NULL;
