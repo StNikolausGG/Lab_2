@@ -26,6 +26,11 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
             {
                 dmas[i][k] = A + rand() % (B - A + 1);
             }
+            if (i == 3)
+            {
+                free(dmas[i]);
+                dmas[i] = NULL;
+            }
         }
         return dmas;
     }
@@ -53,6 +58,7 @@ void printMx(int** Mx, size_t rows, size_t columns)
             else
             {
                 printf("Null");
+                printf("\n");
             }
         }
     }
