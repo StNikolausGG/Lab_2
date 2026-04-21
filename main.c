@@ -91,12 +91,9 @@ int** Multiplication(int **Mx1, int **Mx2, size_t rowsA, size_t colB)
 
 int main()
 {
-    int** Mx1 = NULL;
-    int** Mx2 = NULL;
+    int** Mx1 = CreateMx(3, 3, 0, 7);
+    int** Mx2 = CreateMx(3, 3, 5, 10);
     srand(time(0));
-
-    Mx1 = CreateMx(3, 3, 0, 7);
-    Mx2 = CreateMx(3, 3, 5, 10);
 
     printMx(Mx1, 3, 3);
     printf("\n");
