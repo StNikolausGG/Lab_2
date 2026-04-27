@@ -9,9 +9,11 @@ void freeMx(int** Mx, size_t rows)
         for (size_t i = 0; i < rows; i++)
         {
             free(Mx[i]);
+            Mx[i] = NULL;
         }
     }
     free(Mx);
+    Mx = NULL;
 }
 
 int** CreateMx(size_t rows, size_t columns, int A, int B)
@@ -57,26 +59,29 @@ void printMx(int** Mx, int rows, int columns)
     }
 }
 
-int** Multiplication(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, size_t colB)
+int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, size_t colB)
 {
+    int **MulMx = NULL;
     if (Mx1 && Mx2)
     {
-        int **MulMx = (int**)calloc(rowsA, sizeof(int*));
+        MulMx = (int**)calloc(rowsA, sizeof(int*));
         if (MulMx)
         {
             if (rowsA == colB)
             {
+                for (size_t i = 0; i < rowsA; i++)
+                {
+                    if (!Mx1[i]) Mx1[i] = (int *)calloc(colA, sizeof (int));
+                }
+
                 for (size_t i = 0; i < rowsB; i++)
                 {
-                    if (Mx2[i] == NULL) Mx2[i] = (int *)calloc(colB, sizeof (int));
+                    if (!Mx2[i]) Mx2[i] = (int *)calloc(colB, sizeof (int));
                 }
+
 
                 for (size_t i = 0; i < rowsA; i++)
                 {
-                    if (Mx1[i] == NULL)
-                    {
-                        Mx1[i] = (int *)calloc(colB, sizeof (int));
-                    }
                     MulMx[i] = (int *)calloc(colB, sizeof(int));
                     for (size_t j = 0; j < colB; j++)
                     {
@@ -94,28 +99,31 @@ int** Multiplication(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t row
         else
         {
             freeMx(MulMx, rowsA);
+            return MulMx;
         }
     }
+    return MulMx;
 }
 
 int main()
 {
     //Проверка работы с квадратными матрицами
-//    int rows1 = 3;
-//    int cols1 = 3;
-//    int rows2 = 3;
-//    int cols2 = 3;
-//    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
-//    int** Mx2 = CreateMx(rows2, cols2, 1, 10);
-//    srand(time(0));
+    int rows1 = 3;
+    int cols1 = 3;
+    int rows2 = 3;
+    int cols2 = 3;
+    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+    int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+    srand(time(0));
 
-//    printMx(Mx1, rows1, cols1);
-//    printf("\n");
-//    printMx(Mx2, rows2, cols2);
-//    printf("\n");
+    printMx(Mx1, rows1, cols1);
+    printf("\n");
+    printMx(Mx2, rows2, cols2);
+    printf("\n");
 
-//    int** Mx3 = Multiplication(Mx1, Mx2, rows1, cols1, rows2, cols2);
-//    printMx(Mx3, rows1, cols2);
+    int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
+    if (Mx3) printMx(Mx3, rows1, cols2);
+    else printf("Null adress recieved!");
 
     //Проверка работы с прямоугольными матрицами
     //    int rows1 = 2;
@@ -132,25 +140,27 @@ int main()
     //    printf("\n");
 
     //    int** Mx3 = Multiplication(Mx1, Mx2, rows1, cols1, rows2, cols2);
-    //    printMx(Mx3, rows1, cols2);
+    //    if (Mx3) printMx(Mx3, rows1, cols2);
+    //    else printf("Null adress recieved!");
 
     //Нулевой указатель
-    int rows1 = 3;
-    int cols1 = 3;
-    int rows2 = 3;
-    int cols2 = 3;
-    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
-    int** Mx2 = NULL;
-    srand(time(0));
+//    int rows1 = 3;
+//    int cols1 = 3;
+//    int rows2 = 3;
+//    int cols2 = 3;
+//    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+//    int** Mx2 = NULL;
+//    srand(time(0));
 
-    printMx(Mx1, rows1, cols1);
-    printf("\n");
-    printMx(Mx2, rows2, cols2);
-    printf("\n");
+//    printMx(Mx1, rows1, cols1);
+//    printf("\n");
+//    printMx(Mx2, rows2, cols2);
+//    printf("\n");
 
-    int** Mx3 = Multiplication(Mx1, Mx2, rows1, cols1, rows2, cols2);
+//    int** Mx3 = Multiplication(Mx1, Mx2, rows1, cols1, rows2, cols2);
 
-    printMx(Mx3, rows1, cols2);
+//    if (Mx3) printMx(Mx3, rows1, cols2);
+//    else printf("Null adress recieved!");
 
 
     return 0;
