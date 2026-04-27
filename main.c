@@ -34,6 +34,7 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
     else
     {
         freeMx(dmas, rows);
+        return dmas;
     }
 }
 
