@@ -60,7 +60,7 @@ void printMx(int** Mx, size_t rows, size_t columns)
     }
 }
 
-int** Transponation(int **Mx, size_t rows, size_t columns)
+int** Transponate(int **Mx, size_t rows, size_t columns)
 {
     int** TrspMx = NULL;
     if (Mx)
@@ -107,7 +107,7 @@ int main()
     printMx(Mx, rows, cols);
     printf("\n");
 
-    int** newMx = Transponation(Mx, rows, cols);
+    int** newMx = Transponate(Mx, rows, cols);
     if (!newMx) printf("Null adress recieved!");
     printMx(newMx, cols, rows);
 
