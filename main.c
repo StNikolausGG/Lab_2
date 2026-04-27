@@ -9,9 +9,11 @@ void freeMx(int** Mx, size_t rows)
         for (size_t i = 0; i < rows; i++)
         {
             free(Mx[i]);
+            Mx[i] = NULL;
         }
     }
     free(Mx);
+    Mx = NULL;
 }
 
 int** CreateMx(size_t rows, size_t columns, int A, int B)
@@ -26,18 +28,12 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
             {
                 dmas[i][k] = A + rand() % (B - A + 1);
             }
-            if (i == 3)
-            {
-                free(dmas[i]);
-                dmas[i] = NULL;
-            }
         }
         return dmas;
     }
     else
     {
         freeMx(dmas, rows);
-        return NULL;
     }
 }
 
@@ -53,22 +49,29 @@ void printMx(int** Mx, size_t rows, size_t columns)
                 {
                     printf("%d ", Mx[ix][kx]);
                 }
-                printf("\n");
             }
             else
             {
                 printf("Null");
-                printf("\n");
+
             }
+            printf("\n");
         }
     }
 }
 
 int** Transponation(int **Mx, size_t rows, size_t columns)
 {
+    int** TrspMx = NULL;
     if (Mx)
     {
-        int** TrspMx = (int **) calloc (columns, sizeof (int*));
+        for (size_t i = 0; i < rows; i++)
+        {
+            if (!Mx[i]) Mx[i] = (int*) calloc (rows, sizeof (int));
+        }
+
+        TrspMx = (int **) calloc (columns, sizeof (int*));
+
         if (TrspMx)
         {
             for (size_t i = 0; i < columns; i++)
@@ -84,24 +87,58 @@ int** Transponation(int **Mx, size_t rows, size_t columns)
         else
         {
             freeMx(TrspMx, rows);
+            return TrspMx;
         }
     }
     else
     {
-        return NULL;
+        return TrspMx;
     }
 }
 
 
 int main()
 {
-    int rows = 6;
-    int cols = 6;
+    //Проверка транспонирования матрицы
+    int rows = 3;
+    int cols = 3;
     int** Mx = CreateMx(rows, cols, 1, 10);
+
     printMx(Mx, rows, cols);
     printf("\n");
-    int** newMx = NULL;
-    newMx = Transponation(Mx, rows, cols);
+
+    int** newMx = Transponation(Mx, rows, cols);
+    if (!newMx) printf("Null adress recieved!");
     printMx(newMx, cols, rows);
+
+    //Транспонирование разреженной матрицы
+//    int rows = 3;
+//    int cols = 3;
+//    int** Mx = CreateMx(rows, cols, 1, 10);
+//    free(Mx[0]);
+//    Mx[0] = NULL;
+//    free(Mx[0]);
+//    Mx[2] = NULL;
+
+//    printMx(Mx, rows, cols);
+//    printf("\n");
+
+//    int** newMx = Transponation(Mx, rows, cols);
+//    if (!newMx) printf("Null adress recieved!");
+//    else printMx(newMx, cols, rows);
+
+    //Нулевые адреса
+//    int rows = 3;
+//    int cols = 3;
+//    int** Mx = NULL;
+
+//    printMx(Mx, rows, cols);
+//    printf("\n");
+
+//    int** newMx = Transponation(Mx, rows, cols);
+//    if (!newMx) printf("Null adress recieved!");
+//    else printMx(newMx, cols, rows);
+
+
     return 0;
 }
