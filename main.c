@@ -47,17 +47,17 @@ void printMx(int** Mx, int rows, int columns)
                 {
                     printf("%d ", Mx[ix][kx]);
                 }
-                printf("\n");
             }
             else
             {
                 printf("Null");
             }
+            printf("\n");
         }
     }
 }
 
-int** Multiplication(int **Mx1, int **Mx2, size_t rowsA, size_t colB)
+int** Multiplication(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, size_t colB)
 {
     if (Mx1 && Mx2)
     {
@@ -66,10 +66,20 @@ int** Multiplication(int **Mx1, int **Mx2, size_t rowsA, size_t colB)
         {
             if (rowsA == colB)
             {
+                for (size_t i = 0; i < rowsB; i++)
+                {
+                    if (Mx2[i] == NULL) Mx2[i] = (int *)calloc(colB, sizeof (int));
+                }
+
                 for (size_t i = 0; i < rowsA; i++)
                 {
+                    if (Mx1[i] == NULL)
+                    {
+                        Mx1[i] = (int *)calloc(colB, sizeof (int));
+                    }
                     MulMx[i] = (int *)calloc(colB, sizeof(int));
-                    for (size_t j = 0; j < colB; j++) {
+                    for (size_t j = 0; j < colB; j++)
+                    {
                         int sum = 0;
                         for (size_t k = 0; k < rowsA; k++)
                         {
@@ -86,21 +96,62 @@ int** Multiplication(int **Mx1, int **Mx2, size_t rowsA, size_t colB)
             freeMx(MulMx, rowsA);
         }
     }
-
 }
 
 int main()
 {
-    int** Mx1 = CreateMx(3, 3, 0, 7);
-    int** Mx2 = CreateMx(3, 3, 5, 10);
+    //Проверка работы с квадратными матрицами
+//    int rows1 = 3;
+//    int cols1 = 3;
+//    int rows2 = 3;
+//    int cols2 = 3;
+//    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+//    int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+//    srand(time(0));
+
+//    printMx(Mx1, rows1, cols1);
+//    printf("\n");
+//    printMx(Mx2, rows2, cols2);
+//    printf("\n");
+
+//    int** Mx3 = Multiplication(Mx1, Mx2, rows1, cols1, rows2, cols2);
+//    printMx(Mx3, rows1, cols2);
+
+    //Проверка работы с прямоугольными матрицами
+    //    int rows1 = 2;
+    //    int cols1 = 3;
+    //    int rows2 = 3;
+    //    int cols2 = 2;
+    //    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+    //    int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+    //    srand(time(0));
+
+    //    printMx(Mx1, rows1, cols1);
+    //    printf("\n");
+    //    printMx(Mx2, rows2, cols2);
+    //    printf("\n");
+
+    //    int** Mx3 = Multiplication(Mx1, Mx2, rows1, cols1, rows2, cols2);
+    //    printMx(Mx3, rows1, cols2);
+
+    //Нулевой указатель
+    int rows1 = 3;
+    int cols1 = 3;
+    int rows2 = 3;
+    int cols2 = 3;
+    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+    int** Mx2 = NULL;
     srand(time(0));
 
-    printMx(Mx1, 3, 3);
+    printMx(Mx1, rows1, cols1);
     printf("\n");
-    printMx(Mx2, 3, 3);
+    printMx(Mx2, rows2, cols2);
     printf("\n");
 
-    int** Mx3 = Multiplication(Mx1, Mx2, 3, 3);
-    printMx(Mx3, 3, 3);
+    int** Mx3 = Multiplication(Mx1, Mx2, rows1, cols1, rows2, cols2);
+
+    printMx(Mx3, rows1, cols2);
+
+
     return 0;
 }
