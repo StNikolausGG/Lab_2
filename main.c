@@ -71,7 +71,7 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
         MulMx = (int**)calloc(rowsA, sizeof(int*));
         if (MulMx)
         {
-            if (rowsA == colB)
+            if (colA == rowsB)
             {
                 for (size_t i = 0; i < rowsA; i++)
                 {
@@ -86,11 +86,10 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
 
                 for (size_t i = 0; i < rowsA; i++)
                 {
-                    MulMx[i] = (int *)calloc(colB, sizeof(int));
                     for (size_t j = 0; j < colB; j++)
                     {
                         int sum = 0;
-                        for (size_t k = 0; k < rowsA; k++)
+                        for (size_t k = 0; k < colA; k++)
                         {
                             sum += Mx1[i][k] * Mx2[k][j];
                         }
