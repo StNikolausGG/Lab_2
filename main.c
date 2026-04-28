@@ -113,10 +113,8 @@ int main()
 {
     //Проверка функции освобождения матрицы
         srand(time(0));
-        int rows1 = 3;
-        int cols1 = 3;
-        int rows2 = 3;
-        int cols2 = 3;
+        int rows1 = 3, cols1 = 3;
+        int rows2 = 3, cols2 = 3;
         int** Mx1 = CreateMx(rows1, cols1, 1, 10);
         int** Mx2 = CreateMx(rows2, cols2, 1, 10);
         freeMx(&Mx1, rows1);
@@ -126,12 +124,17 @@ int main()
         printMx(Mx2, rows2, cols2);
         printf("\n");
 
+        //Проверка функций createMx и printMx
+    //    int rows = 3;
+    //    int cols = 3;
+    //    int** Mx = CreateMx(rows, cols, 1, 10);
+    //    printMx(Mx, rows, cols);
+    //    printf("\n");
+
     //Проверка работы с квадратными матрицами
 //    srand(time(0));
-//    int rows1 = 3;
-//    int cols1 = 3;
-//    int rows2 = 3;
-//    int cols2 = 3;
+//    int rows1 = 3, cols1 = 3;
+//    int rows2 = 3, cols2 = 3;
 //    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
 //    int** Mx2 = CreateMx(rows2, cols2, 1, 10);
 
@@ -145,13 +148,11 @@ int main()
 //    else printf("Null address recieved!");
 
     //Проверка работы с прямоугольными матрицами
-    //    int rows1 = 2;
-    //    int cols1 = 3;
-    //    int rows2 = 3;
-    //    int cols2 = 2;
+    //    srand(time(0));
+    //    int rows1 = 2, cols1 = 3;
+    //    int rows2 = 3, cols2 = 2;
     //    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
     //    int** Mx2 = CreateMx(rows2, cols2, 1, 10);
-    //    srand(time(0));
 
     //    printMx(Mx1, rows1, cols1);
     //    printf("\n");
@@ -163,13 +164,11 @@ int main()
     //    else printf("Null address recieved!");
 
     //Нулевой указатель
-//    int rows1 = 3;
-//    int cols1 = 3;
-//    int rows2 = 3;
-//    int cols2 = 3;
+//    srand(time(0));
+//    int rows1 = 3, cols1 = 3;
+//    int rows2 = 3, cols2 = 3;
 //    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
 //    int** Mx2 = NULL;
-//    srand(time(0));
 
 //    printMx(Mx1, rows1, cols1);
 //    printf("\n");
