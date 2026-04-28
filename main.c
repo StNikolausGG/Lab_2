@@ -2,18 +2,17 @@
 #include <stdlib.h>
 #include <time.h>
 
-void freeMx(int** Mx, size_t rows)
+void freeMx(int*** Mx, size_t rows)
 {
-    if (Mx)
+    if (Mx && *Mx)
     {
         for (size_t i = 0; i < rows; i++)
         {
-            free(Mx[i]);
-            Mx[i] = NULL;
+            free((*Mx)[i]);
         }
     }
-    free(Mx);
-    Mx = NULL;
+    free(*Mx);
+    *Mx = NULL;
 }
 
 int** CreateMx(size_t rows, size_t columns, int A, int B)
@@ -33,7 +32,7 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
     }
     else
     {
-        freeMx(dmas, rows);
+        freeMx(&dmas, rows);
     }
 }
 
@@ -57,6 +56,10 @@ void printMx(int** Mx, size_t rows, size_t columns)
             }
             printf("\n");
         }
+    }
+    else
+    {
+        printf("Empty Matrix");
     }
 }
 
@@ -86,7 +89,7 @@ int** Transponate(int **Mx, size_t rows, size_t columns)
         }
         else
         {
-            freeMx(TrspMx, rows);
+            freeMx(&TrspMx, rows);
             return TrspMx;
         }
     }
@@ -99,17 +102,26 @@ int** Transponate(int **Mx, size_t rows, size_t columns)
 
 int main()
 {
-    //Проверка транспонирования матрицы
+    //Проверка функции freeMx
     int rows = 3;
     int cols = 3;
     int** Mx = CreateMx(rows, cols, 1, 10);
-
+    freeMx(&Mx, rows);
     printMx(Mx, rows, cols);
     printf("\n");
 
-    int** newMx = Transponate(Mx, rows, cols);
-    if (!newMx) printf("Null adress recieved!");
-    printMx(newMx, cols, rows);
+
+    //Проверка транспонирования матрицы
+//    int rows = 3;
+//    int cols = 3;
+//    int** Mx = CreateMx(rows, cols, 1, 10);
+
+//    printMx(Mx, rows, cols);
+//    printf("\n");
+
+//    int** newMx = Transponate(Mx, rows, cols);
+//    if (!newMx) printf("Null adress recieved!");
+//    printMx(newMx, cols, rows);
 
     //Транспонирование разреженной матрицы
 //    int rows = 3;
