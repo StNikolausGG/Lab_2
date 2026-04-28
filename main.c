@@ -110,6 +110,13 @@ int main()
     printMx(Mx, rows, cols);
     printf("\n");
 
+    //Проверка функций createMx и printMx
+//    int rows = 3;
+//    int cols = 3;
+//    int** Mx = CreateMx(rows, cols, 1, 10);
+//    printMx(Mx, rows, cols);
+//    printf("\n");
+
 
     //Проверка транспонирования матрицы
 //    int rows = 3;
