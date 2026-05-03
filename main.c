@@ -33,6 +33,7 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
     else
     {
         freeMx(&dmas, rows);
+        return dmas;
     }
 }
 
@@ -68,47 +69,41 @@ int** Transponate(int **Mx, size_t rows, size_t columns)
     int** TrspMx = NULL;
     if (Mx)
     {
-        for (size_t i = 0; i < rows; i++)
-        {
-            if (!Mx[i]) Mx[i] = (int*) calloc (rows, sizeof (int));
-        }
-
         TrspMx = (int **) calloc (columns, sizeof (int*));
 
         if (TrspMx)
         {
+            for (size_t i = 0; i < rows; i++)
+            {
+                if (!Mx[i]) Mx[i] = (int*)calloc(rows, sizeof (int));
+            }
+
             for (size_t i = 0; i < columns; i++)
             {
-                TrspMx[i] = (int *) calloc (rows, sizeof (int));
+                TrspMx[i] = (int *)calloc(columns, sizeof (int));
                 for (size_t k = 0; k < rows; k++)
                 {
                     TrspMx[i][k] = Mx[k][i];
                 }
             }
-            return TrspMx;
         }
         else
         {
             freeMx(&TrspMx, rows);
-            return TrspMx;
         }
     }
-    else
-    {
-        return TrspMx;
-    }
+    return TrspMx;
 }
-
 
 int main()
 {
     //Проверка функции freeMx
-    int rows = 3;
-    int cols = 3;
-    int** Mx = CreateMx(rows, cols, 1, 10);
-    freeMx(&Mx, rows);
-    printMx(Mx, rows, cols);
-    printf("\n");
+//    int rows = 3;
+//    int cols = 3;
+//    int** Mx = CreateMx(rows, cols, 1, 10);
+//    freeMx(&Mx, rows);
+//    printMx(Mx, rows, cols);
+//    printf("\n");
 
     //Проверка функций createMx и printMx
 //    int rows = 3;
@@ -119,16 +114,16 @@ int main()
 
 
     //Проверка транспонирования матрицы
-//    int rows = 3;
-//    int cols = 3;
-//    int** Mx = CreateMx(rows, cols, 1, 10);
+    int rows = 3;
+    int cols = 3;
+    int** Mx = CreateMx(rows, cols, 1, 10);
 
-//    printMx(Mx, rows, cols);
-//    printf("\n");
+    printMx(Mx, rows, cols);
+    printf("\n");
 
-//    int** newMx = Transponate(Mx, rows, cols);
-//    if (!newMx) printf("Null adress recieved!");
-//    printMx(newMx, cols, rows);
+    int** newMx = Transponate(Mx, rows, cols);
+    if (!newMx) printf("Null adress recieved!");
+    printMx(newMx, cols, rows);
 
     //Транспонирование разреженной матрицы
 //    int rows = 3;
