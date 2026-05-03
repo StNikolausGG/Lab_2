@@ -65,9 +65,10 @@ void printMx(int** Mx, int rows, int columns)
 
 int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, size_t colB)
 {
+    int **MulMx = NULL;
     if (Mx1 && Mx2)
     {
-        int **MulMx = (int**)calloc(rowsA, sizeof (int*));
+        MulMx = (int**)calloc(rowsA, sizeof (int*));
         if (MulMx)
         {
             if (colA == rowsB)
@@ -91,12 +92,14 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
                         MulMx[i][j] = sum;
                     }
                 }
-                return MulMx;
             }
         }
-        return MulMx;
+        else
+        {
+            freeMx(&MulMx, rowsA);
+        }
     }
-    return NULL;
+    return MulMx;
 }
 
 int main()
@@ -114,7 +117,7 @@ int main()
         printMx(Mx2, rows2, cols2);
         printf("\n");
 
-        //Проверка функций createMx и printMx
+//        Проверка функций createMx и printMx
 //        int rows = 3;
 //        int cols = 3;
 //        int** Mx = CreateMx(rows, cols, 1, 10);
