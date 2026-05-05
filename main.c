@@ -28,13 +28,12 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
                 dmas[i][k] = A + rand() % (B - A + 1);
             }
         }
-        return dmas;
     }
     else
     {
         freeMx(&dmas, rows);
-        return dmas;
     }
+    return dmas;
 }
 
 void printMx(int** Mx, size_t rows, size_t columns)
