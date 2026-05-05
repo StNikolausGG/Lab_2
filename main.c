@@ -9,10 +9,11 @@ void freeMx(int*** Mx, size_t rows)
         for (size_t i = 0; i < rows; i++)
         {
             free((*Mx)[i]);
+            (*Mx)[i] = NULL;
         }
+        free(*Mx);
+        *Mx = NULL;
     }
-    free(*Mx);
-    *Mx = NULL;
 }
 
 int** CreateMx(size_t rows, size_t columns, int A, int B)
@@ -104,17 +105,17 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
 int main()
 {
     //Проверка функции освобождения матрицы
-//        srand(time(0));
-//        int rows1 = 3, cols1 = 3;
-//        int rows2 = 3, cols2 = 3;
-//        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
-//        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
-//        freeMx(&Mx1, rows1);
+        srand(time(0));
+        int rows1 = 3, cols1 = 3;
+        int rows2 = 3, cols2 = 3;
+        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+        freeMx(&Mx1, rows1);
 
-//        printMx(Mx1, rows1, cols1);
-//        printf("\n");
-//        printMx(Mx2, rows2, cols2);
-//        printf("\n");
+        printMx(Mx1, rows1, cols1);
+        printf("\n");
+        printMx(Mx2, rows2, cols2);
+        printf("\n");
 
 //        Проверка функций createMx и printMx
 //        int rows = 3;
@@ -175,21 +176,21 @@ int main()
 //        else printf("Null address recieved!");
 
     //Нулевой указатель
-    srand(time(0));
-    int rows1 = 3, cols1 = 3;
-    int rows2 = 3, cols2 = 3;
-    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
-    int** Mx2 = NULL;
+//    srand(time(0));
+//    int rows1 = 3, cols1 = 3;
+//    int rows2 = 3, cols2 = 3;
+//    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+//    int** Mx2 = NULL;
 
-    printMx(Mx1, rows1, cols1);
-    printf("\n");
-    printMx(Mx2, rows2, cols2);
-    printf("\n");
+//    printMx(Mx1, rows1, cols1);
+//    printf("\n");
+//    printMx(Mx2, rows2, cols2);
+//    printf("\n");
 
-    int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
+//    int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
 
-    if (Mx3) printMx(Mx3, rows1, cols2);
-    else printf("Null address recieved!");
+//    if (Mx3) printMx(Mx3, rows1, cols2);
+//    else printf("Null address recieved!");
 
 
     return 0;
