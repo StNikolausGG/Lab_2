@@ -28,13 +28,12 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
                 dmas[i][k] = A + rand() % (B - A + 1);
             }
         }
-        return dmas;
     }
     else
     {
         freeMx(&dmas, rows);
-        return dmas;
     }
+    return dmas;
 }
 
 void printMx(int** Mx, int rows, int columns)
@@ -176,21 +175,21 @@ int main()
 //        else printf("Null address recieved!");
 
     //Нулевой указатель
-//    srand(time(0));
-//    int rows1 = 3, cols1 = 3;
-//    int rows2 = 3, cols2 = 3;
-//    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
-//    int** Mx2 = NULL;
+    srand(time(0));
+    int rows1 = 3, cols1 = 3;
+    int rows2 = 3, cols2 = 3;
+    int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+    int** Mx2 = NULL;
 
-//    printMx(Mx1, rows1, cols1);
-//    printf("\n");
-//    printMx(Mx2, rows2, cols2);
-//    printf("\n");
+    printMx(Mx1, rows1, cols1);
+    printf("\n");
+    printMx(Mx2, rows2, cols2);
+    printf("\n");
 
-//    int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
+    int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
 
-//    if (Mx3) printMx(Mx3, rows1, cols2);
-//    else printf("Null address recieved!");
+    if (Mx3) printMx(Mx3, rows1, cols2);
+    else printf("Null address recieved!");
 
 
     return 0;
