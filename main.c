@@ -105,17 +105,17 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
 int main()
 {
     //Проверка функции освобождения матрицы
-        srand(time(0));
-        int rows1 = 3, cols1 = 3;
-        int rows2 = 3, cols2 = 3;
-        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
-        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
-        freeMx(&Mx1, rows1);
+//        srand(time(0));
+//        int rows1 = 3, cols1 = 3;
+//        int rows2 = 3, cols2 = 3;
+//        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+//        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+//        freeMx(&Mx1, rows1);
 
-        printMx(Mx1, rows1, cols1);
-        printf("\n");
-        printMx(Mx2, rows2, cols2);
-        printf("\n");
+//        printMx(Mx1, rows1, cols1);
+//        printf("\n");
+//        printMx(Mx2, rows2, cols2);
+//        printf("\n");
 
 //        Проверка функций createMx и printMx
 //        int rows = 3;
@@ -147,6 +147,25 @@ int main()
 //        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
 //        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
 
+//        printMx(Mx1, rows1, cols1);
+//        printf("\n");
+//        printMx(Mx2, rows2, cols2);
+//        printf("\n");
+
+//        int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
+//        if (Mx3) printMx(Mx3, rows1, cols2);
+//        else printf("Null address recieved!");
+
+        //Работа с разреженной матрицей
+//        srand(time(0));
+//        int rows1 = 3, cols1 = 3;
+//        int rows2 = 3, cols2 = 3;
+//        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+//        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+//        free(Mx1[0]);
+//        Mx1[0] = NULL;
+//        free(Mx1[0]);
+//        Mx1[2] = NULL;
 //        printMx(Mx1, rows1, cols1);
 //        printf("\n");
 //        printMx(Mx2, rows2, cols2);
