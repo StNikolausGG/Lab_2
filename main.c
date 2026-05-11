@@ -175,6 +175,27 @@ int main()
 //        if (Mx3) printMx(Mx3, rows1, cols2);
 //        else printf("Null address recieved!");
 
+        //Работа с разреженной матрицей
+//        srand(time(0));
+//        int rows1 = 3, cols1 = 3;
+//        int rows2 = 3, cols2 = 3;
+//        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+//        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+//        free(Mx1[0]);
+//        Mx1[0] = NULL;
+//        free(Mx1[1]);
+//        Mx1[1] = NULL;
+//        free(Mx1[2]);
+//        Mx1[2] = NULL;
+//        printMx(Mx1, rows1, cols1);
+//        printf("\n");
+//        printMx(Mx2, rows2, cols2);
+//        printf("\n");
+
+//        int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
+//        if (Mx3) printMx(Mx3, rows1, cols2);
+//        else printf("Null address recieved!");
+
     //Нулевой указатель
 //    srand(time(0));
 //    int rows1 = 3, cols1 = 3;
