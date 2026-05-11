@@ -97,12 +97,12 @@ int** Transponate(int **Mx, size_t rows, size_t columns)
 int main()
 {
     //Проверка функции freeMx
-//    int rows = 3;
-//    int cols = 3;
-//    int** Mx = CreateMx(rows, cols, 1, 10);
-//    freeMx(&Mx, rows);
-//    printMx(Mx, rows, cols);
-//    printf("\n");
+    int rows = 3;
+    int cols = 3;
+    int** Mx = CreateMx(rows, cols, 1, 10);
+    freeMx(&Mx, rows);
+    printMx(Mx, rows, cols);
+    printf("\n");
 
     //Проверка функций createMx и printMx
 //    int rows = 3;
@@ -113,16 +113,16 @@ int main()
 
 
     //Проверка транспонирования матрицы
-    int rows = 3;
-    int cols = 3;
-    int** Mx = CreateMx(rows, cols, 1, 10);
+//    int rows = 3;
+//    int cols = 3;
+//    int** Mx = CreateMx(rows, cols, 1, 10);
 
-    printMx(Mx, rows, cols);
-    printf("\n");
+//    printMx(Mx, rows, cols);
+//    printf("\n");
 
-    int** newMx = Transponate(Mx, rows, cols);
-    if (!newMx) printf("Null adress recieved!");
-    printMx(newMx, cols, rows);
+//    int** newMx = Transponate(Mx, rows, cols);
+//    if (!newMx) printf("Null adress recieved!");
+//    printMx(newMx, cols, rows);
 
     //Транспонирование разреженной матрицы
 //    int rows = 3;
@@ -136,7 +136,25 @@ int main()
 //    printMx(Mx, rows, cols);
 //    printf("\n");
 
-//    int** newMx = Transponation(Mx, rows, cols);
+//    int** newMx = Transponate(Mx, rows, cols);
+//    if (!newMx) printf("Null adress recieved!");
+//    else printMx(newMx, cols, rows);
+
+    //Транспонирование полностью разреженной матрицы
+//    int rows = 3;
+//    int cols = 4;
+//    int** Mx = CreateMx(rows, cols, 1, 10);
+//    free(Mx[0]);
+//    Mx[0] = NULL;
+//    free(Mx[1]);
+//    Mx[1] = NULL;
+//    free(Mx[0]);
+//    Mx[2] = NULL;
+
+//    printMx(Mx, rows, cols);
+//    printf("\n");
+
+//    int** newMx = Transponate(Mx, rows, cols);
 //    if (!newMx) printf("Null adress recieved!");
 //    else printMx(newMx, cols, rows);
 
@@ -148,7 +166,7 @@ int main()
 //    printMx(Mx, rows, cols);
 //    printf("\n");
 
-//    int** newMx = Transponation(Mx, rows, cols);
+//    int** newMx = Transponate(Mx, rows, cols);
 //    if (!newMx) printf("Null adress recieved!");
 //    else printMx(newMx, cols, rows);
 
