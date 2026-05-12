@@ -4,21 +4,21 @@
 
 void freeMx(int*** Mx, size_t rows)
 {
-    if (Mx && *Mx)
+    if (Mx && *Mx && rows != 0)
     {
         for (size_t i = 0; i < rows; i++)
         {
             free((*Mx)[i]);
         }
+        free(*Mx);
+        *Mx = NULL;
     }
-    free(*Mx);
-    *Mx = NULL;
 }
 
 int** CreateMx(size_t rows, size_t columns, int A, int B)
 {
     int **dmas = (int **)calloc(rows, sizeof(int*));
-    if (dmas)
+    if (dmas && rows != 0 && columns != 0)
     {
         for (size_t i = 0; i < rows; i++)
         {
@@ -38,7 +38,7 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
 
 void printMx(int** Mx, size_t rows, size_t columns)
 {
-    if (Mx)
+    if (Mx && rows != 0 && columns != 0)
     {
         for (size_t ix = 0; ix < rows; ix++)
         {
@@ -66,15 +66,15 @@ void printMx(int** Mx, size_t rows, size_t columns)
 int** Transponate(int **Mx, size_t rows, size_t columns)
 {
     int** TrspMx = NULL;
-    if (Mx)
+    if (Mx && rows != 0 && columns != 0)
     {
-        TrspMx = (int **) calloc (columns, sizeof (int*));
+        TrspMx = (int **) calloc (rows, sizeof (int*));
 
         if (TrspMx)
         {
             for (size_t i = 0; i < rows; i++)
             {
-                if (!Mx[i]) Mx[i] = (int*)calloc(rows, sizeof (int));
+                if (!Mx[i]) Mx[i] = (int*)calloc(columns, sizeof (int));
             }
 
             for (size_t i = 0; i < columns; i++)
@@ -88,7 +88,7 @@ int** Transponate(int **Mx, size_t rows, size_t columns)
         }
         else
         {
-            freeMx(&TrspMx, rows);
+            freeMx(&TrspMx, columns);
         }
     }
     return TrspMx;
@@ -158,7 +158,7 @@ int main()
 //    if (!newMx) printf("Null adress recieved!");
 //    else printMx(newMx, cols, rows);
 
-    //Нулевые адреса
+//    Нулевые адреса
 //    int rows = 3;
 //    int cols = 3;
 //    int** Mx = NULL;
