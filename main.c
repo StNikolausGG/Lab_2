@@ -4,7 +4,7 @@
 
 void freeMx(int*** Mx, size_t rows)
 {
-    if (Mx && *Mx)
+    if (Mx && *Mx && rows != 0)
     {
         for (size_t i = 0; i < rows; i++)
         {
@@ -19,7 +19,7 @@ void freeMx(int*** Mx, size_t rows)
 int** CreateMx(size_t rows, size_t columns, int A, int B)
 {
     int **dmas = (int **)calloc(rows, sizeof(int*));
-    if (dmas)
+    if (dmas && rows != 0 && columns != 0)
     {
         for (size_t i = 0; i < rows; i++)
         {
@@ -37,15 +37,15 @@ int** CreateMx(size_t rows, size_t columns, int A, int B)
     return dmas;
 }
 
-void printMx(int** Mx, int rows, int columns)
+void printMx(int** Mx, size_t rows, size_t columns)
 {
-    if (Mx)
+    if (Mx && rows != 0 && columns != 0)
     {
-        for (int ix = 0; ix < rows; ix++)
+        for (size_t ix = 0; ix < rows; ix++)
         {
             if (Mx[ix])
             {
-                for (int kx = 0; kx < columns; kx++)
+                for (size_t kx = 0; kx < columns; kx++)
                 {
                     printf("%d ", Mx[ix][kx]);
                 }
@@ -66,7 +66,7 @@ void printMx(int** Mx, int rows, int columns)
 int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, size_t colB)
 {
     int **MulMx = NULL;
-    if (Mx1 && Mx2)
+    if (Mx1 && Mx2 && rowsA != 0 && rowsB != 0 && colA != 0 && colB != 0)
     {
         MulMx = (int**)calloc(rowsA, sizeof (int*));
         if (MulMx)
@@ -75,13 +75,14 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
             {
                 for (size_t i = 0; i < rowsB; i++)
                 {
-                    if (!Mx2[i]) Mx2[i] = (int*)calloc(rowsB, sizeof (int));
+                    if (!Mx2[i]) Mx2[i] = (int*)calloc(colB, sizeof (int));
                 }
 
                 for (size_t i = 0; i < rowsA; i++)
                 {
-                    if (!Mx1[i]) Mx1[i] = (int*)calloc(rowsA, sizeof (int));
+                    if (!Mx1[i]) Mx1[i] = (int*)calloc(colA, sizeof (int));
                     MulMx[i] = (int*)calloc(colB, sizeof (int));
+
                     for (size_t j = 0; j < colB; j++)
                     {
                         int sum = 0;
@@ -92,6 +93,10 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
                         MulMx[i][j] = sum;
                     }
                 }
+            }
+            else
+            {
+                freeMx(&MulMx, rowsA);
             }
         }
         else
