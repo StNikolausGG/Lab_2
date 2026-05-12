@@ -9,6 +9,7 @@ void freeMx(int*** Mx, size_t rows)
         for (size_t i = 0; i < rows; i++)
         {
             free((*Mx)[i]);
+            (*Mx)[i] = NULL;
         }
         free(*Mx);
         *Mx = NULL;
@@ -68,7 +69,7 @@ int** Transponate(int **Mx, size_t rows, size_t columns)
     int** TrspMx = NULL;
     if (Mx && rows != 0 && columns != 0)
     {
-        TrspMx = (int **) calloc (rows, sizeof (int*));
+        TrspMx = (int **) calloc (columns, sizeof (int*));
 
         if (TrspMx)
         {
@@ -79,7 +80,7 @@ int** Transponate(int **Mx, size_t rows, size_t columns)
 
             for (size_t i = 0; i < columns; i++)
             {
-                TrspMx[i] = (int *)calloc(columns, sizeof (int));
+                TrspMx[i] = (int *)calloc(rows, sizeof (int));
                 for (size_t k = 0; k < rows; k++)
                 {
                     TrspMx[i][k] = Mx[k][i];
