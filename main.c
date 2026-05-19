@@ -73,14 +73,9 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
         {
             if (colA == rowsB)
             {
-                for (size_t i = 0; i < rowsB; i++)
-                {
-                    if (!Mx2[i]) Mx2[i] = (int*)calloc(colB, sizeof (int));
-                }
 
                 for (size_t i = 0; i < rowsA; i++)
                 {
-                    if (!Mx1[i]) Mx1[i] = (int*)calloc(colA, sizeof (int));
                     MulMx[i] = (int*)calloc(colB, sizeof (int));
 
                     for (size_t j = 0; j < colB; j++)
@@ -88,7 +83,27 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
                         int sum = 0;
                         for (size_t k = 0; k < colA; k++)
                         {
-                            sum += Mx1[i][k] * Mx2[k][j];
+                            int val1 = 0;
+                            if (Mx1[i] != NULL)
+                            {
+                                val1 = Mx1[i][k];
+                            }
+                            else
+                            {
+                                val1 = 0;
+                            }
+
+                            int val2 = 0;
+                            if (Mx2[k] != NULL)
+                            {
+                                val2 = Mx2[k][j];
+                            }
+                            else
+                            {
+                                val2 = 0;
+                            }
+
+                            sum += val1 * val2;
                         }
                         MulMx[i][j] = sum;
                     }
@@ -110,17 +125,17 @@ int** Multiply(int **Mx1, int **Mx2, size_t rowsA, size_t colA, size_t rowsB, si
 int main()
 {
     //Проверка функции освобождения матрицы
-        srand(time(0));
-        int rows1 = 3, cols1 = 3;
-        int rows2 = 3, cols2 = 3;
-        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
-        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
-        freeMx(&Mx1, rows1);
+//        srand(time(0));
+//        int rows1 = 3, cols1 = 3;
+//        int rows2 = 3, cols2 = 3;
+//        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+//        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+//        freeMx(&Mx1, rows1);
 
-        printMx(Mx1, rows1, cols1);
-        printf("\n");
-        printMx(Mx2, rows2, cols2);
-        printf("\n");
+//        printMx(Mx1, rows1, cols1);
+//        printf("\n");
+//        printMx(Mx2, rows2, cols2);
+//        printf("\n");
 
 //        Проверка функций createMx и printMx
 //        int rows = 3;
@@ -181,25 +196,25 @@ int main()
 //        else printf("Null address recieved!");
 
         //Работа с разреженной матрицей
-//        srand(time(0));
-//        int rows1 = 3, cols1 = 3;
-//        int rows2 = 3, cols2 = 3;
-//        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
-//        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
-//        free(Mx1[0]);
-//        Mx1[0] = NULL;
-//        free(Mx1[1]);
-//        Mx1[1] = NULL;
-//        free(Mx1[2]);
-//        Mx1[2] = NULL;
-//        printMx(Mx1, rows1, cols1);
-//        printf("\n");
-//        printMx(Mx2, rows2, cols2);
-//        printf("\n");
+        srand(time(0));
+        int rows1 = 3, cols1 = 3;
+        int rows2 = 3, cols2 = 3;
+        int** Mx1 = CreateMx(rows1, cols1, 1, 10);
+        int** Mx2 = CreateMx(rows2, cols2, 1, 10);
+        free(Mx1[0]);
+        Mx1[0] = NULL;
+        free(Mx1[1]);
+        Mx1[1] = NULL;
+        free(Mx1[2]);
+        Mx1[2] = NULL;
+        printMx(Mx1, rows1, cols1);
+        printf("\n");
+        printMx(Mx2, rows2, cols2);
+        printf("\n");
 
-//        int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
-//        if (Mx3) printMx(Mx3, rows1, cols2);
-//        else printf("Null address recieved!");
+        int** Mx3 = Multiply(Mx1, Mx2, rows1, cols1, rows2, cols2);
+        if (Mx3) printMx(Mx3, rows1, cols2);
+        else printf("Null address recieved!");
 
     //Нулевой указатель
 //    srand(time(0));
